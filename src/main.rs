@@ -48,7 +48,8 @@ fn problem2(input: &str) {
         calories.push(current_calories);
     }
 
-    calories.sort();
+    // sort ascending, then sum last 3 items
+    calories.sort_unstable();
     let top3: u32 = calories.iter().rev().take(3).sum();
 
     println!("Answer 2 is {}", top3)
