@@ -4,3 +4,5 @@ members = [
     "day01",
     "day02"
 ]
+
+exclude = ["template"]
