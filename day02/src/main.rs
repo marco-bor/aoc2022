@@ -30,19 +30,19 @@ impl FromStr for What {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        return match s {
+        match s {
             "A" | "X" => Ok(What::Rock),
             "B" | "Y" => Ok(What::Paper),
             "C" | "Z" => Ok(What::Scissors),
             _ => Err(()),
-        };
+        }
     }
 }
 impl FromStr for Round1 {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let Some((first, second)) = s.split_once(" ") else {
+        let Some((first, second)) = s.split_once(' ') else {
             return Err(())
         };
 
@@ -50,10 +50,10 @@ impl FromStr for Round1 {
             return Err(())
         };
 
-        return Ok(Round1 {
+        Ok(Round1 {
             opponent: first,
             me: second,
-        });
+        })
     }
 }
 impl FromStr for RoundResult {
@@ -72,7 +72,7 @@ impl FromStr for Round2 {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let Some((first, second)) = s.split_once(" ") else {
+        let Some((first, second)) = s.split_once(' ') else {
             return Err(())
         };
 
@@ -80,27 +80,26 @@ impl FromStr for Round2 {
             return Err(())
         };
 
-        return Ok(Round2 {
+        Ok(Round2 {
             opponent: first,
             result: second,
-        });
+        })
     }
 }
 
 impl Round1 {
     fn result(&self) -> RoundResult {
         if self.opponent == self.me {
-            return RoundResult::Tie;
-        }
-        if match self.me {
+            RoundResult::Tie
+        } else if match self.me {
             What::Rock => self.opponent == What::Scissors,
             What::Paper => self.opponent == What::Rock,
             What::Scissors => self.opponent == What::Paper,
         } {
-            return RoundResult::Win;
+            RoundResult::Win
+        } else {
+            RoundResult::Loss
         }
-
-        return RoundResult::Loss;
     }
 }
 

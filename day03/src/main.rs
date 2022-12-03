@@ -13,12 +13,20 @@ const fn priority(char: char) -> u32 {
     }
 }
 
+#[test]
+fn test_priorities() {
+    assert_eq!(priority('a'), 1);
+    assert_eq!(priority('z'), 26);
+    assert_eq!(priority('A'), 27);
+    assert_eq!(priority('Z'), 52);
+}
+
 fn problem1(input: &str) -> u32 {
     input
         .lines()
         .map(|l| l.split_at(l.len() / 2))
         .flat_map(|x| x.0.chars().find(|c| x.1.contains(*c)))
-        .map(|c| priority(c))
+        .map(priority)
         .sum()
 }
 
@@ -27,8 +35,8 @@ fn problem2(input: &str) -> u32 {
         .lines()
         .collect::<Vec<&str>>()
         .chunks_exact(3)
-        .flat_map(|g| find_badge(g))
-        .map(|badge| priority(badge))
+        .flat_map(find_badge)
+        .map(priority)
         .sum()
 }
 
@@ -40,12 +48,4 @@ fn find_badge(group: &[&str]) -> Option<char> {
     } else {
         None
     }
-}
-
-#[test]
-fn test_priorities() {
-    assert_eq!(priority('a'), 1);
-    assert_eq!(priority('z'), 26);
-    assert_eq!(priority('A'), 27);
-    assert_eq!(priority('Z'), 52);
 }
