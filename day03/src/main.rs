@@ -35,8 +35,8 @@ fn problem2(input: &str) -> u32 {
 fn find_badge(group: &[&str]) -> Option<char> {
     if let [first, second, third] = group {
         first
-            .find(|c| second.contains(c) && third.contains(c))
-            .map(|i| first.as_bytes()[i] as char)
+            .chars()
+            .find(|&c| second.contains(c) && third.contains(c))
     } else {
         None
     }
