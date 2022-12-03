@@ -34,21 +34,18 @@ fn problem2(input: &str) -> u32 {
 
 fn find_badge(group: &[&str]) -> Option<char> {
     if let [first, second, third] = group {
-        first.find(|c| second.contains(c) && third.contains(c)).map(|i| first.as_bytes()[i] as char)
+        first
+            .find(|c| second.contains(c) && third.contains(c))
+            .map(|i| first.as_bytes()[i] as char)
     } else {
         None
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_priorities() {
-        assert_eq!(priority('a'), 1);
-        assert_eq!(priority('z'), 26);
-        assert_eq!(priority('A'), 27);
-        assert_eq!(priority('Z'), 52);
-    }
+#[test]
+fn test_priorities() {
+    assert_eq!(priority('a'), 1);
+    assert_eq!(priority('z'), 26);
+    assert_eq!(priority('A'), 27);
+    assert_eq!(priority('Z'), 52);
 }
