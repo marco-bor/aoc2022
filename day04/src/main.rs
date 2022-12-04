@@ -17,7 +17,7 @@ fn problem1(input: &str) -> u32 {
             };
             Some((a, b))
         })
-        .filter(|(a, b)| a.contains(&b) || b.contains(&a))
+        .filter(|(a, b)| a.contains(b) || b.contains(a))
         .count() as u32
 }
 
@@ -31,7 +31,7 @@ fn problem2(input: &str) -> u32 {
             };
             Some((a, b))
         })
-        .filter(|(a, b)| a.overlaps(&b))
+        .filter(|(a, b)| a.overlaps(b))
         .count() as u32
 }
 
