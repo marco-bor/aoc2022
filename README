@@ -1,0 +1,5 @@
+Run with test data:
+`cargo test --bin <day>`
+
+Run with real data:
+`cargo run --bin <day>`
