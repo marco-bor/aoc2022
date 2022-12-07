@@ -75,11 +75,7 @@ impl FS {
     fn find_child(&self, name: &str) -> Option<Rc<FS>> {
         match self {
             FS::File(..) => None,
-            FS::Dir(_, children, _) => children
-                .borrow()
-                .iter()
-                .find(|f| f.name() == name)
-                .map(|r| r.clone()),
+            FS::Dir(_, children, _) => children.borrow().iter().find(|f| f.name() == name).cloned(),
         }
     }
 
@@ -93,9 +89,8 @@ impl FS {
 
     /// Push child if self is directory
     fn push_child(&self, child: FS) {
-        match self {
-            FS::Dir(_, children, _) => children.borrow_mut().push(Rc::new(child)),
-            _ => {}
+        if let FS::Dir(_, children, _) = self {
+            children.borrow_mut().push(Rc::new(child))
         }
     }
 
@@ -138,7 +133,7 @@ fn parse_input(s: &str) -> Rc<FS> {
                         "/" => fs.clone(),
                         param => cwd
                             .find_child(param)
-                            .expect(&format!("folder '{}' does not exist", param)),
+                            .unwrap_or_else(|| panic!("folder '{}' does not exist", param)),
                     }
                 }
                 "ls" => {}
