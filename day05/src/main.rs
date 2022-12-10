@@ -55,7 +55,11 @@ fn problem2(input: &str) -> String {
         }
 
         for _ in 0..(r.qty) {
-            stacks[(r.to - 1) as usize].push(temp_stack.pop().expect("temp_stack is empty. cannot pop items"));
+            stacks[(r.to - 1) as usize].push(
+                temp_stack
+                    .pop()
+                    .expect("temp_stack is empty. cannot pop items"),
+            );
         }
     }
 
