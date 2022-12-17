@@ -93,11 +93,8 @@ impl FromStr for Node {
             match c {
                 '0'..='9' => {
                     let mut num = vec![c];
-                    loop {
-                        match chars.peek() {
-                            Some(_c @ '0'..='9') => num.push(chars.next().unwrap()),
-                            _ => break,
-                        }
+                    while let Some(_c @ '0'..='9') = chars.peek() {
+                        num.push(chars.next().unwrap())
                     }
 
                     let a = num
@@ -106,18 +103,16 @@ impl FromStr for Node {
                         .parse()
                         .expect("could not parse number");
 
-                    match stack.last_mut() {
-                        Some(Self::Complex(v)) => v.push(Self::Simple(a)),
-                        _ => {}
+                    if let Some(Self::Complex(v)) = stack.last_mut() {
+                        v.push(Self::Simple(a))
                     }
                 }
                 '[' => stack.push(Self::Complex(Vec::default())),
                 ']' => {
                     if stack.len() > 1 {
                         let node = stack.pop().unwrap();
-                        match stack.last_mut() {
-                            Some(Self::Complex(v)) => v.push(node),
-                            _ => {}
+                        if let Some(Self::Complex(v)) = stack.last_mut() {
+                            v.push(node)
                         }
                     }
                 }

@@ -27,9 +27,9 @@ fn problem1(input: &str) -> usize {
         .product()
 }
 
-fn play_rounds(monkeys: &Vec<RefCell<Monkey>>, rounds: usize) {
+fn play_rounds(monkeys: &[RefCell<Monkey>], rounds: usize) {
     for _ in 0..rounds {
-        for monkey_ in monkeys.iter() {
+        for monkey_ in monkeys {
             let mut monkey = monkey_.borrow_mut();
             let items = monkey.items.borrow().clone();
             monkey.rounds += items.len();
@@ -56,9 +56,9 @@ fn play_rounds(monkeys: &Vec<RefCell<Monkey>>, rounds: usize) {
     }
 }
 
-fn play_rounds2(monkeys: &Vec<RefCell<Monkey>>, rounds: usize) {
+fn play_rounds2(monkeys: &[RefCell<Monkey>], rounds: usize) {
     for _ in 0..rounds {
-        for monkey_ in monkeys.iter() {
+        for monkey_ in monkeys {
             let mut monkey = monkey_.borrow_mut();
             let items = monkey.items.borrow().clone();
             monkey.rounds += items.len();
