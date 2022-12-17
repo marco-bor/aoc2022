@@ -23,10 +23,10 @@ fn problem2(input: &str) -> usize {
         .flat_map(|l| l.parse::<Node>())
         .collect::<Vec<_>>();
 
-    nodes.push("[[2]]".parse().unwrap());
-    let divider2 = nodes.last().unwrap().clone();
-    nodes.push("[[6]]".parse().unwrap());
-    let divider6 = nodes.last().unwrap().clone();
+    let divider2: Node = "[[2]]".parse().unwrap();
+    nodes.push(divider2.clone());
+    let divider6: Node = "[[6]]".parse().unwrap();
+    nodes.push(divider6.clone());
 
     nodes.sort_by(|a, b| a.partial_cmp(b).unwrap());
     let divider2_idx = 1 + nodes
