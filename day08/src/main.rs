@@ -17,7 +17,7 @@ fn problem1(input: &str) -> usize {
         .count()
 }
 
-fn problem2(input: &str) -> u32 {
+fn problem2(_input: &str) -> u32 {
     0
 }
 
@@ -45,7 +45,7 @@ impl Map {
     fn visibility(&self, index: usize) -> u32 {
         let mut visibility = 0u32;
         let col = index % self.width;
-        let row = (index - col) / self.width;
+        let _row = (index - col) / self.width;
 
         if col == 0 || col == self.width - 1 {
             // first or last column
@@ -119,7 +119,7 @@ impl Map {
 
     fn visibility_left(&self, index: usize) -> usize {
         let col = index % self.width;
-        let mut max = 0;
+        let _max = 0;
 
         if col == 0 {
             // first col

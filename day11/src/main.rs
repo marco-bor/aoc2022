@@ -14,7 +14,7 @@ fn main() {
 fn problem1(input: &str) -> usize {
     let mut monkeys = parse_monkeys(input)
         .into_iter()
-        .map(|m| RefCell::new(m))
+        .map(RefCell::new)
         .collect::<Vec<_>>();
     play_rounds(&monkeys, 20);
     monkeys.sort_by_key(|m| m.borrow().rounds);
@@ -88,7 +88,7 @@ fn play_rounds2(monkeys: &Vec<RefCell<Monkey>>, rounds: usize) {
 fn problem2(input: &str) -> usize {
     let mut monkeys = parse_monkeys(input)
         .into_iter()
-        .map(|m| RefCell::new(m))
+        .map(RefCell::new)
         .collect::<Vec<_>>();
     play_rounds2(&monkeys, 1000);
     monkeys.sort_by_key(|m| m.borrow().rounds);
@@ -157,9 +157,7 @@ impl FromStr for Monkey {
         let id = lines
             .next()
             .unwrap()
-            .split(&[':', ' '])
-            .skip(1)
-            .next()
+            .split(&[':', ' ']).nth(1)
             .unwrap()
             .parse::<u8>()
             .unwrap();
@@ -171,7 +169,7 @@ impl FromStr for Monkey {
             .collect::<Vec<_>>();
 
         let operation =
-            build_operator_tree(lines.next().unwrap().split(':').skip(1).next().unwrap()).unwrap();
+            build_operator_tree(lines.next().unwrap().split(':').nth(1).unwrap()).unwrap();
 
         let test = parse_test(lines);
 

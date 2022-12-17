@@ -103,7 +103,7 @@ impl Map {
             return false;
         };
 
-        return next <= current + 1;
+        next <= current + 1
     }
 
     fn can_go_left(&self, pos: &Pos) -> bool {
@@ -115,7 +115,7 @@ impl Map {
             return false;
         };
 
-        return next <= current + 1;
+        next <= current + 1
     }
 
     fn can_go_down(&self, pos: &Pos) -> bool {
@@ -127,7 +127,7 @@ impl Map {
             return false;
         };
 
-        return next <= current + 1;
+        next <= current + 1
     }
 
     fn can_go_up(&self, pos: &Pos) -> bool {
@@ -139,7 +139,7 @@ impl Map {
             return false;
         };
 
-        return next <= current + 1;
+        next <= current + 1
     }
 }
 
@@ -177,7 +177,7 @@ impl FromStr for Map {
 }
 
 const fn char_to_num(c: char) -> u8 {
-    return c as u8 - 'a' as u8;
+    c as u8 - b'a'
 }
 
 #[test]

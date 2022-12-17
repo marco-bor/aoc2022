@@ -95,7 +95,7 @@ impl FromStr for Node {
                     let mut num = vec![c];
                     loop {
                         match chars.peek() {
-                            Some(c @ '0'..='9') => num.push(chars.next().unwrap()),
+                            Some(_c @ '0'..='9') => num.push(chars.next().unwrap()),
                             _ => break,
                         }
                     }
@@ -131,7 +131,7 @@ impl FromStr for Node {
 
 fn parse_node_pairs(s: &str) -> Vec<(Node, Node)> {
     s.split("\n\n")
-        .flat_map(|l| l.split_once("\n"))
+        .flat_map(|l| l.split_once('\n'))
         .flat_map(|(left, right)| {
             let (Ok(left), Ok(right)) = (left.parse::<Node>(), right.parse::<Node>()) else {
             return None;
